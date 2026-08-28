@@ -3,340 +3,325 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BARLKT — Tecnología que se disfruta</title>
+<title>BARLKT — Tienda oficial</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0a0908;
-    --bg-elevated:#141210;
-    --bg-card:#17140f;
-    --line:#2a2621;
+    --surface:#131110;
+    --surface-2:#1a1714;
+    --line:#28241f;
     --gold:#c99a5b;
     --gold-light:#e6c690;
-    --text:#f4f1ea;
-    --text-muted:#9c948a;
-    --text-faint:#5f5951;
-    --radius:2px;
+    --text:#f5f2ec;
+    --muted:#9a9088;
+    --faint:#5c5650;
+    --radius:3px;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
-    background:var(--bg);
-    color:var(--text);
+    background:var(--bg);color:var(--text);
     font-family:'Inter',sans-serif;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
-  h1,h2,h3,.display{
-    font-family:'Sora',sans-serif;
-    letter-spacing:-0.02em;
-  }
+  h1,h2,h3,.display{font-family:'Sora',sans-serif;letter-spacing:-0.02em;}
   a{color:inherit;text-decoration:none;}
   img{display:block;max-width:100%;}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
-
-  /* subtle circuit-node background accent */
-  .node-line{position:absolute;pointer-events:none;opacity:.35;}
+  button{font-family:inherit;cursor:pointer;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px;}
+  ::selection{background:var(--gold);color:#161310;}
 
   /* ---------- NAV ---------- */
   header{
-    position:fixed;top:0;left:0;right:0;z-index:100;
-    background:rgba(10,9,8,0.82);
-    backdrop-filter:blur(10px);
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    background:rgba(10,9,8,0.86);
+    backdrop-filter:blur(12px);
     border-bottom:1px solid var(--line);
   }
   .nav-inner{
-    max-width:1180px;margin:0 auto;padding:18px 32px;
-    display:flex;align-items:center;justify-content:space-between;
+    max-width:1240px;margin:0 auto;padding:16px 32px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
   }
-  .logo{
-    display:flex;align-items:center;gap:10px;
-    font-family:'Sora',sans-serif;font-weight:700;font-size:19px;letter-spacing:.02em;
-  }
-  .logo svg{flex-shrink:0;}
-  .nav-links{display:flex;align-items:center;gap:34px;font-size:14px;color:var(--text-muted);}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-weight:700;font-size:19px;letter-spacing:.02em;}
+  .logo img{height:34px;width:auto;}
+  .nav-links{display:flex;align-items:center;gap:32px;font-size:14px;color:var(--muted);}
+  .nav-links a{transition:color .2s;}
   .nav-links a:hover{color:var(--gold-light);}
+  .nav-right{display:flex;align-items:center;gap:18px;}
   .nav-cta{
-    border:1px solid var(--gold);
-    color:var(--gold-light);
-    padding:9px 18px;
-    font-size:13px;
-    font-weight:500;
-    letter-spacing:.01em;
-    border-radius:var(--radius);
-    transition:background .2s,color .2s;
-    white-space:nowrap;
+    border:1px solid var(--gold);color:var(--gold-light);
+    padding:9px 18px;font-size:13px;font-weight:500;
+    border-radius:var(--radius);transition:background .2s,color .2s;white-space:nowrap;
   }
   .nav-cta:hover{background:var(--gold);color:#141210;}
+  .cart-btn{
+    position:relative;background:none;border:1px solid var(--line);
+    width:40px;height:40px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--text);transition:border-color .2s;
+  }
+  .cart-btn:hover{border-color:var(--gold);}
+  .cart-badge{
+    position:absolute;top:-6px;right:-6px;
+    background:var(--gold);color:#161310;
+    font-size:10.5px;font-weight:700;
+    width:18px;height:18px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .2s;
+  }
+  .cart-badge.pulse{animation:pulse .35s ease;}
+  @keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.35);}100%{transform:scale(1);}}
 
   /* ---------- HERO ---------- */
-  .hero{
-    position:relative;
-    padding:200px 0 120px;
-    border-bottom:1px solid var(--line);
-    overflow:hidden;
-  }
+  .hero{position:relative;padding:190px 0 90px;border-bottom:1px solid var(--line);overflow:hidden;}
   .hero-eyebrow{
-    color:var(--gold);
-    font-size:12px;
-    font-weight:600;
-    letter-spacing:.22em;
-    text-transform:uppercase;
-    margin-bottom:26px;
-    display:flex;align-items:center;gap:10px;
+    color:var(--gold);font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+    margin-bottom:24px;display:flex;align-items:center;gap:10px;
   }
   .hero-eyebrow::before{content:'';width:26px;height:1px;background:var(--gold);}
-  .hero h1{
-    font-size:clamp(42px,6.4vw,84px);
-    line-height:1.02;
-    font-weight:700;
-    max-width:900px;
+  .hero h1{font-size:clamp(40px,6vw,78px);line-height:1.03;font-weight:700;max-width:820px;}
+  .hero h1 em{font-style:normal;color:var(--gold-light);}
+  .hero p{margin-top:24px;max-width:460px;font-size:16.5px;line-height:1.6;color:var(--muted);}
+  .hero-actions{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap;}
+  .hero-stats{margin-top:60px;display:flex;gap:0;border-top:1px solid var(--line);max-width:600px;}
+  .stat{flex:1;padding:20px 24px 0 0;border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat b{display:block;font-family:'Sora',sans-serif;font-size:24px;font-weight:700;}
+  .stat span{font-size:11.5px;color:var(--faint);letter-spacing:.06em;text-transform:uppercase;}
+  .hero-bg-mark{
+    position:absolute;right:-60px;top:100px;font-family:'Sora',sans-serif;font-size:300px;font-weight:800;
+    color:transparent;-webkit-text-stroke:1px var(--line);line-height:1;user-select:none;z-index:0;
   }
-  .hero h1 em{
-    font-style:normal;
-    color:var(--gold-light);
-  }
-  .hero p{
-    margin-top:26px;
-    max-width:480px;
-    font-size:17px;
-    line-height:1.6;
-    color:var(--text-muted);
-  }
-  .hero-stats{
-    margin-top:64px;
-    display:flex;gap:0;
-    border-top:1px solid var(--line);
-    max-width:640px;
-  }
-  .stat{
-    flex:1;padding:22px 28px 0 0;
+
+  /* ---------- TRUST BAR ---------- */
+  .trust{border-bottom:1px solid var(--line);background:var(--surface);}
+  .trust-inner{display:flex;flex-wrap:wrap;gap:0;}
+  .trust-item{
+    flex:1;min-width:220px;padding:22px 32px;
+    display:flex;align-items:center;gap:14px;
     border-right:1px solid var(--line);
   }
-  .stat:last-child{border-right:none;}
-  .stat b{
-    display:block;font-family:'Sora',sans-serif;font-size:26px;font-weight:700;color:var(--text);
-  }
-  .stat span{font-size:12px;color:var(--text-faint);letter-spacing:.06em;text-transform:uppercase;}
+  .trust-item:last-child{border-right:none;}
+  .trust-item svg{flex-shrink:0;color:var(--gold);}
+  .trust-item b{display:block;font-size:13.5px;font-weight:600;}
+  .trust-item span{font-size:12px;color:var(--muted);}
 
-  .hero-bg-mark{
-    position:absolute;
-    right:-80px;top:120px;
-    font-family:'Sora',sans-serif;
-    font-size:340px;
-    font-weight:800;
-    color:transparent;
-    -webkit-text-stroke:1px var(--line);
-    line-height:1;
-    user-select:none;
-    z-index:0;
-  }
+  /* ---------- SHOP ---------- */
+  .shop-head{padding:88px 0 0;}
+  .shop-head .eyebrow{color:var(--gold);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;}
+  .shop-head h2{font-size:clamp(28px,3.4vw,40px);font-weight:700;margin-bottom:10px;}
+  .shop-head p{color:var(--muted);font-size:14.5px;max-width:460px;line-height:1.6;}
 
-  /* ---------- SECTION LABEL ---------- */
-  .section-head{
-    padding:100px 0 56px;
-    display:flex;align-items:flex-end;justify-content:space-between;
+  .filters{
+    display:flex;gap:10px;flex-wrap:wrap;
+    padding:36px 0 44px;
     border-bottom:1px solid var(--line);
-    gap:24px;flex-wrap:wrap;
   }
-  .section-head h2{
-    font-size:clamp(28px,3.4vw,40px);
-    font-weight:700;
+  .filter-chip{
+    padding:9px 18px;font-size:13px;font-weight:500;color:var(--muted);
+    border:1px solid var(--line);border-radius:30px;background:transparent;
+    transition:all .2s;
   }
-  .section-head p{color:var(--text-muted);font-size:14px;max-width:340px;line-height:1.6;}
+  .filter-chip:hover{color:var(--text);border-color:var(--gold);}
+  .filter-chip.active{background:var(--gold);color:#161310;border-color:var(--gold);font-weight:600;}
 
-  /* ---------- PRODUCTS ---------- */
-  .product{
-    display:grid;
-    grid-template-columns:0.9fr 1.1fr;
-    gap:70px;
-    padding:90px 0;
-    border-bottom:1px solid var(--line);
-    align-items:center;
+  .grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+    padding:44px 0 100px;
   }
-  .product:nth-child(even){
-    grid-template-columns:1.1fr 0.9fr;
+  .card{
+    position:relative;background:var(--surface);
+    border:1px solid var(--line);border-radius:6px;overflow:hidden;
+    display:flex;flex-direction:column;
+    transition:border-color .25s, transform .25s;
+    opacity:0;transform:translateY(20px);
   }
-  .product:nth-child(even) .product-media{order:2;}
-  .product:nth-child(even) .product-info{order:1;}
-
-  .product-media{
-    position:relative;
-    background:linear-gradient(160deg,#1b1712,#0f0d0b);
-    border:1px solid var(--line);
-    border-radius:6px;
-    padding:48px;
+  .card.in{opacity:1;transform:translateY(0);}
+  .card:hover{border-color:var(--gold);transform:translateY(-4px);}
+  .card-media{
+    position:relative;aspect-ratio:1/1;
+    background:linear-gradient(160deg,#1c1813,#100e0b);
+    display:flex;align-items:center;justify-content:center;padding:38px;
+    cursor:pointer;overflow:hidden;
+  }
+  .card-media img{
+    max-height:100%;width:auto;object-fit:contain;
+    filter:drop-shadow(0 22px 26px rgba(0,0,0,.5));
+    transition:transform .45s ease;
+  }
+  .card:hover .card-media img{transform:scale(1.06);}
+  .card-badge{
+    position:absolute;top:14px;left:14px;
+    font-size:10.5px;padding:5px 10px;border-radius:20px;
+    background:rgba(10,9,8,.72);border:1px solid var(--line);
+    color:var(--muted);letter-spacing:.04em;
+  }
+  .card-badge.low{color:var(--gold-light);border-color:var(--gold);}
+  .quick-view-btn{
+    position:absolute;left:14px;right:14px;bottom:14px;
+    background:rgba(10,9,8,.88);border:1px solid var(--gold);color:var(--gold-light);
+    padding:10px;font-size:12.5px;font-weight:600;border-radius:var(--radius);
+    text-align:center;opacity:0;transform:translateY(8px);
+    transition:opacity .22s, transform .22s;
+  }
+  .card:hover .quick-view-btn{opacity:1;transform:translateY(0);}
+  .card-body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1;}
+  .card-cat{font-size:10.5px;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:8px;}
+  .card-body h3{font-size:18px;font-weight:700;margin-bottom:4px;}
+  .card-tagline{font-size:12.5px;color:var(--muted);margin-bottom:14px;line-height:1.5;flex:1;}
+  .card-swatches{display:flex;gap:6px;margin-bottom:14px;}
+  .swatch{width:14px;height:14px;border-radius:50%;border:1px solid rgba(255,255,255,.25);}
+  .card-footer{display:flex;align-items:center;justify-content:space-between;}
+  .card-price{font-family:'Sora',sans-serif;font-size:19px;font-weight:700;}
+  .add-btn{
+    background:var(--gold);color:#161310;border:none;
+    width:36px;height:36px;border-radius:50%;
     display:flex;align-items:center;justify-content:center;
-    min-height:380px;
-  }
-  .product-media img{
-    max-height:340px;width:auto;object-fit:contain;
-    filter:drop-shadow(0 30px 40px rgba(0,0,0,.55));
-  }
-  .product-index{
-    position:absolute;top:20px;left:20px;
-    font-family:'Sora',sans-serif;
-    font-size:12px;color:var(--text-faint);
-    letter-spacing:.1em;
-  }
-  .stock-tag{
-    position:absolute;top:20px;right:20px;
-    font-size:11px;padding:5px 10px;
-    border:1px solid var(--line);
-    color:var(--text-muted);
-    letter-spacing:.04em;
-    border-radius:20px;
-    background:rgba(10,9,8,.6);
-  }
-  .stock-tag.low{color:var(--gold-light);border-color:var(--gold);}
-
-  .product-info .cat{
-    font-size:12px;color:var(--gold);
-    letter-spacing:.16em;text-transform:uppercase;
-    font-weight:600;margin-bottom:14px;
-  }
-  .product-info h3{
-    font-size:clamp(30px,3.4vw,44px);
-    font-weight:700;
-    margin-bottom:10px;
-  }
-  .product-info .tagline{
-    color:var(--text-muted);
-    font-size:16px;
-    margin-bottom:28px;
-    max-width:420px;
-  }
-  .price-row{
-    display:flex;align-items:baseline;gap:10px;
-    margin-bottom:30px;
-  }
-  .price-row .price{
-    font-family:'Sora',sans-serif;
-    font-size:34px;font-weight:700;color:var(--text);
-  }
-  .price-row .colors{font-size:13px;color:var(--text-faint);}
-
-  .specs{
-    list-style:none;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px 24px;
-    margin-bottom:32px;
-    padding-top:24px;
-    border-top:1px solid var(--line);
-  }
-  .specs li{
-    font-size:13.5px;
-    color:var(--text-muted);
-    display:flex;gap:8px;
-    line-height:1.5;
-  }
-  .specs li::before{
-    content:'';
-    width:4px;height:4px;
-    border-radius:50%;
-    background:var(--gold);
-    margin-top:7px;
-    flex-shrink:0;
-  }
-  .includes{
-    font-size:12.5px;color:var(--text-faint);
-    margin-bottom:30px;
-    line-height:1.6;
-    font-style:italic;
-  }
-  .product-actions{display:flex;gap:14px;flex-wrap:wrap;}
-  .btn-primary{
-    background:var(--gold);
-    color:#161310;
-    padding:14px 26px;
-    font-size:14px;
-    font-weight:600;
-    border-radius:var(--radius);
     transition:background .2s, transform .2s;
+  }
+  .add-btn:hover{background:var(--gold-light);transform:scale(1.08);}
+
+  @media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:620px){.grid{grid-template-columns:1fr;}.trust-item{border-right:none;border-bottom:1px solid var(--line);}}
+
+  /* ---------- QUICK VIEW MODAL ---------- */
+  .overlay{
+    position:fixed;inset:0;background:rgba(6,5,4,.72);backdrop-filter:blur(4px);
+    z-index:300;display:none;align-items:center;justify-content:center;padding:24px;
+  }
+  .overlay.open{display:flex;}
+  .modal{
+    background:var(--surface);border:1px solid var(--line);border-radius:8px;
+    max-width:920px;width:100%;max-height:88vh;overflow:auto;
+    display:grid;grid-template-columns:1fr 1fr;
+  }
+  .modal-media{
+    background:linear-gradient(160deg,#1c1813,#100e0b);
+    display:flex;align-items:center;justify-content:center;padding:50px;position:relative;
+  }
+  .modal-media img{max-height:360px;filter:drop-shadow(0 26px 30px rgba(0,0,0,.5));}
+  .modal-close{
+    position:absolute;top:16px;right:16px;background:rgba(10,9,8,.7);
+    border:1px solid var(--line);width:34px;height:34px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;color:var(--text);
+    transition:border-color .2s;
+  }
+  .modal-close:hover{border-color:var(--gold);}
+  .modal-info{padding:44px 40px;}
+  .modal-info .cat{font-size:11px;color:var(--gold);letter-spacing:.16em;text-transform:uppercase;font-weight:600;margin-bottom:12px;}
+  .modal-info h3{font-size:30px;font-weight:700;margin-bottom:8px;}
+  .modal-info .tagline{color:var(--muted);font-size:15px;margin-bottom:20px;}
+  .modal-price{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;margin-bottom:22px;}
+  .option-label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px;font-weight:600;}
+  .variant-row{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;}
+  .variant-opt{
+    display:flex;align-items:center;gap:8px;
+    padding:8px 14px;border:1px solid var(--line);border-radius:30px;
+    font-size:13px;color:var(--muted);transition:all .2s;
+  }
+  .variant-opt .dot{width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,.25);}
+  .variant-opt.active{border-color:var(--gold);color:var(--text);background:rgba(201,154,91,.1);}
+  .modal-specs{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 20px;margin:22px 0;padding-top:22px;border-top:1px solid var(--line);}
+  .modal-specs li{font-size:13px;color:var(--muted);display:flex;gap:8px;line-height:1.5;}
+  .modal-specs li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--gold);margin-top:7px;flex-shrink:0;}
+  .modal-includes{font-size:12px;color:var(--faint);font-style:italic;margin-bottom:24px;line-height:1.6;}
+  .qty-row{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+  .qty-stepper{display:flex;align-items:center;border:1px solid var(--line);border-radius:var(--radius);}
+  .qty-stepper button{background:none;border:none;color:var(--text);width:36px;height:38px;font-size:16px;}
+  .qty-stepper button:hover{color:var(--gold-light);}
+  .qty-stepper span{width:34px;text-align:center;font-size:14px;font-weight:600;}
+  .modal-actions{display:flex;gap:12px;flex-wrap:wrap;}
+
+  .btn-primary{
+    background:var(--gold);color:#161310;padding:14px 26px;font-size:14px;font-weight:600;
+    border:none;border-radius:var(--radius);transition:background .2s, transform .2s;
     display:inline-flex;align-items:center;gap:8px;
   }
   .btn-primary:hover{background:var(--gold-light);transform:translateY(-1px);}
   .btn-secondary{
-    border:1px solid var(--line);
-    color:var(--text-muted);
-    padding:14px 22px;
-    font-size:14px;
-    border-radius:var(--radius);
-    transition:border-color .2s, color .2s;
+    border:1px solid var(--line);color:var(--muted);background:transparent;
+    padding:14px 22px;font-size:14px;border-radius:var(--radius);transition:border-color .2s, color .2s;
   }
   .btn-secondary:hover{border-color:var(--gold);color:var(--gold-light);}
 
+  @media(max-width:720px){.modal{grid-template-columns:1fr;}.modal-media{padding:30px;}.modal-info{padding:32px 24px;}}
+
+  /* ---------- CART DRAWER ---------- */
+  .drawer-overlay{
+    position:fixed;inset:0;background:rgba(6,5,4,.6);z-index:300;
+    opacity:0;pointer-events:none;transition:opacity .3s;
+  }
+  .drawer-overlay.open{opacity:1;pointer-events:auto;}
+  .drawer{
+    position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);
+    background:var(--bg);border-left:1px solid var(--line);z-index:301;
+    display:flex;flex-direction:column;
+    transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer-head{
+    padding:24px 26px;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .drawer-head h3{font-size:18px;font-weight:700;}
+  .drawer-items{flex:1;overflow:auto;padding:10px 26px;}
+  .drawer-empty{padding:60px 0;text-align:center;color:var(--faint);font-size:14px;}
+  .cart-line{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--line);}
+  .cart-line img{width:66px;height:66px;object-fit:contain;background:var(--surface);border-radius:4px;padding:8px;border:1px solid var(--line);}
+  .cart-line-info{flex:1;}
+  .cart-line-info b{display:block;font-size:14px;font-weight:600;margin-bottom:2px;}
+  .cart-line-variant{font-size:11.5px;color:var(--muted);margin-bottom:8px;}
+  .cart-line-bottom{display:flex;align-items:center;justify-content:space-between;}
+  .cart-line-qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:var(--radius);}
+  .cart-line-qty button{background:none;border:none;color:var(--text);width:26px;height:26px;font-size:13px;}
+  .cart-line-qty span{width:22px;text-align:center;font-size:12.5px;}
+  .cart-line-price{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;}
+  .remove-line{color:var(--faint);font-size:11px;text-decoration:underline;margin-top:6px;background:none;border:none;}
+  .remove-line:hover{color:var(--gold-light);}
+  .drawer-foot{padding:22px 26px 28px;border-top:1px solid var(--line);}
+  .subtotal-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;}
+  .subtotal-row span{font-size:13px;color:var(--muted);}
+  .subtotal-row b{font-family:'Sora',sans-serif;font-size:22px;}
+  .drawer-foot .btn-primary{width:100%;justify-content:center;padding:15px;}
+  .drawer-note{font-size:11px;color:var(--faint);margin-top:12px;text-align:center;line-height:1.5;}
+
   /* ---------- CONTACT / FOOTER ---------- */
-  .contact{
-    padding:120px 0 100px;
-    text-align:center;
-    position:relative;
-  }
-  .contact h2{
-    font-size:clamp(32px,5vw,58px);
-    font-weight:700;
-    max-width:720px;
-    margin:0 auto 22px;
-    line-height:1.08;
-  }
-  .contact p{
-    color:var(--text-muted);
-    font-size:16px;
-    max-width:440px;
-    margin:0 auto 44px;
-  }
-  .contact .btn-primary{
-    padding:17px 36px;font-size:15px;
-  }
-  .contact-meta{
-    margin-top:44px;
-    display:flex;gap:36px;justify-content:center;
-    font-size:13px;color:var(--text-faint);
-    letter-spacing:.04em;
-  }
+  .contact{padding:110px 0 90px;text-align:center;position:relative;border-top:1px solid var(--line);}
+  .contact h2{font-size:clamp(30px,4.6vw,54px);font-weight:700;max-width:700px;margin:0 auto 20px;line-height:1.1;}
+  .contact p{color:var(--muted);font-size:15.5px;max-width:420px;margin:0 auto 40px;}
+  .contact .btn-primary{padding:16px 34px;font-size:14.5px;}
+  .contact-meta{margin-top:40px;display:flex;gap:30px;justify-content:center;font-size:12.5px;color:var(--faint);flex-wrap:wrap;}
+  footer{border-top:1px solid var(--line);padding:32px 0;}
+  .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+  .footer-inner span{font-size:12px;color:var(--faint);}
 
-  footer{
-    border-top:1px solid var(--line);
-    padding:36px 0;
-  }
-  .footer-inner{
-    display:flex;justify-content:space-between;align-items:center;
-    flex-wrap:wrap;gap:14px;
-  }
-  .footer-inner .logo{font-size:15px;}
-  .footer-inner span{font-size:12.5px;color:var(--text-faint);}
-
-  /* WhatsApp floating button */
   .float-wa{
-    position:fixed;bottom:26px;right:26px;z-index:99;
-    background:var(--gold);
-    color:#161310;
-    width:56px;height:56px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 10px 30px rgba(0,0,0,.5);
-    transition:transform .2s;
+    position:fixed;bottom:26px;right:26px;z-index:150;background:var(--gold);color:#161310;
+    width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 10px 28px rgba(0,0,0,.5);transition:transform .2s;
   }
   .float-wa:hover{transform:scale(1.07);}
 
-  /* reveal on scroll */
-  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
-  .reveal.in{opacity:1;transform:translateY(0);}
+  .toast{
+    position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--surface-2);border:1px solid var(--gold);color:var(--text);
+    padding:13px 22px;border-radius:30px;font-size:13.5px;z-index:400;
+    opacity:0;pointer-events:none;transition:opacity .25s, transform .25s;
+    display:flex;align-items:center;gap:8px;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
   @media(max-width:860px){
     .wrap{padding:0 20px;}
     .nav-links{display:none;}
-    .hero{padding:150px 0 80px;}
+    .hero{padding:150px 0 70px;}
     .hero-bg-mark{display:none;}
-    .product,.product:nth-child(even){
-      grid-template-columns:1fr;gap:36px;padding:56px 0;
-    }
-    .product:nth-child(even) .product-media,
-    .product:nth-child(even) .product-info{order:initial;}
-    .specs{grid-template-columns:1fr;}
-    .hero-stats{flex-direction:column;gap:14px;}
-    .stat{border-right:none;border-bottom:1px solid var(--line);padding-bottom:14px;}
+    .hero-stats{flex-direction:column;gap:12px;}
+    .stat{border-right:none;border-bottom:1px solid var(--line);padding-bottom:12px;}
+    .trust-item{min-width:100%;}
   }
 </style>
 </head>
@@ -345,14 +330,20 @@
 <header>
   <div class="nav-inner">
     <div class="logo">
-      <img src="imagenes/logo.png" alt="Logo BARLKT" style="height: 42px; width: auto;">
+      <img src="imagenes/logo.png" alt="BARLKT" onerror="this.style.display='none'">
       BARLKT
     </div>
     <nav class="nav-links">
-      <a href="#productos">Productos</a>
+      <a href="#tienda">Tienda</a>
       <a href="#contacto">Contacto</a>
     </nav>
-    <a class="nav-cta" href="https://wa.me/+593995235589?text=Hola%20BARLKT,%20quiero%20más%20información" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+    <div class="nav-right">
+      <a class="nav-cta" href="https://wa.me/593995235589?text=Hola%20BARLKT,%20quiero%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener">Escríbenos</a>
+      <button class="cart-btn" id="cartToggle" aria-label="Ver carrito">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="9" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -361,7 +352,11 @@
   <div class="wrap" style="position:relative;z-index:1;">
     <div class="hero-eyebrow">Colección 2026 · Quito, Ecuador</div>
     <h1>Tecnología que<br>se <em>disfruta</em>.</h1>
-    <p>Tablets, gadgets interactivos y seguridad para el hogar. Productos seleccionados para regalar, aprender y disfrutar — con stock limitado y confirmado.</p>
+    <p>Tablets, gadgets interactivos y seguridad para el hogar. Cinco productos, disponibilidad verificada, entrega coordinada en Quito.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#tienda">Ver tienda</a>
+      <a class="btn-secondary" href="https://wa.me/593995235589?text=Hola%20BARLKT,%20quiero%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener">Hablar por WhatsApp</a>
+    </div>
     <div class="hero-stats">
       <div class="stat"><b>05</b><span>Productos</span></div>
       <div class="stat"><b>$60–$150</b><span>Rango de precios</span></div>
@@ -370,170 +365,49 @@
   </div>
 </section>
 
-<section id="productos">
+<section class="trust">
+  <div class="wrap trust-inner">
+    <div class="trust-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="6" width="16" height="12" rx="1.5"/><path d="M17 10h3.5l2.5 3v5h-6"/><circle cx="6" cy="19" r="1.6"/><circle cx="18.5" cy="19" r="1.6"/></svg>
+      <div><b>Entrega en Quito</b><span>Coordinada por WhatsApp</span></div>
+    </div>
+    <div class="trust-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z"/></svg>
+      <div><b>Stock verificado</b><span>Disponibilidad real por producto</span></div>
+    </div>
+    <div class="trust-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5H3l1.6-4A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+      <div><b>Atención directa</b><span>Resolvemos dudas antes de comprar</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="tienda">
   <div class="wrap">
-    <div class="section-head reveal">
-      <h2>Selección actual</h2>
-      <p>Tablets infantiles, tecnología personal, gadgets interactivos y seguridad — cinco productos, disponibilidad verificada.</p>
+    <div class="shop-head">
+      <div class="eyebrow">Selección actual</div>
+      <h2>Tienda BARLKT</h2>
+      <p>Explora la colección y arma tu pedido — el carrito se envía directo por WhatsApp para confirmar color, cantidad y entrega.</p>
     </div>
-
-    <!-- 1. TECLAST P50 -->
-    <div class="product reveal">
-      <div class="product-media">
-        <span class="product-index">01 / 05</span>
-        <span class="stock-tag low">2 unidades · Azul</span>
-        <img src="imagenes/teclast.png" alt="Tablet Teclast P50">
-      </div>
-      <div class="product-info">
-        <div class="cat">Tablet</div>
-        <h3>Teclast P50</h3>
-        <p class="tagline">Grande para estudiar. Cómoda para llevar.</p>
-        <div class="price-row"><span class="price">$150</span><span class="colors">precio unitario</span></div>
-        <ul class="specs">
-          <li>Android 14</li>
-          <li>Unisoc T606 Octa-Core 1.6 GHz</li>
-          <li>6 GB RAM + 8 GB expansión virtual</li>
-          <li>128 GB · ampliable hasta 1 TB</li>
-          <li>Pantalla IPS 11" · 1280 × 800</li>
-          <li>Cámara 13 MP + 5 MP</li>
-          <li>Batería 8000 mAh</li>
-          <li>WiFi 2.4/5 GHz · Bluetooth 5.0 · GPS</li>
-        </ul>
-        <p class="includes">Incluye cargador y manual. Solo quedan 2 unidades en azul.</p>
-        <div class="product-actions">
-          <a class="btn-primary" href="https://wa.me/+593995235589?text=Hola,%20me%20interesa%20la%20Tablet%20Teclast%20P50%20($150)" target="_blank" rel="noopener">Consultar disponibilidad</a>
-        </div>
-      </div>
+    <div class="filters" id="filters">
+      <button class="filter-chip active" data-filter="todos">Todos</button>
+      <button class="filter-chip" data-filter="tablets">Tablets</button>
+      <button class="filter-chip" data-filter="infantil">Infantil</button>
+      <button class="filter-chip" data-filter="gadgets">Gadgets</button>
+      <button class="filter-chip" data-filter="seguridad">Seguridad</button>
     </div>
-
-    <!-- 2. CAMARA S11 -->
-    <div class="product reveal">
-      <div class="product-media">
-        <span class="product-index">02 / 05</span>
-        <span class="stock-tag low">2 unidades · Blanco</span>
-        <img src="imagenes/camara.jpg" alt="Cámara de seguridad solar S11">
-      </div>
-      <div class="product-info">
-        <div class="cat">Seguridad para exteriores</div>
-        <h3>Cámara S11</h3>
-        <p class="tagline">Más tranquilidad, bajo el sol.</p>
-        <div class="price-row"><span class="price">$70</span><span class="colors">precio unitario</span></div>
-        <ul class="specs">
-          <li>Resolución 2K HD</li>
-          <li>Visión nocturna a color</li>
-          <li>Movimiento PTZ de amplio rango</li>
-          <li>Detección de movimiento PIR</li>
-          <li>Audio bidireccional</li>
-          <li>Batería de alta capacidad</li>
-          <li>Panel solar de 5 W</li>
-          <li>Monitoreo desde el celular</li>
-        </ul>
-        <p class="includes">Verificar compatibilidad de conectividad antes de la instalación.</p>
-        <div class="product-actions">
-          <a class="btn-primary" href="https://wa.me/+593995235589?text=Hola,%20me%20interesa%20la%20Cámara%20S11%20($70)" target="_blank" rel="noopener">Consultar disponibilidad</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. A20K -->
-    <div class="product reveal">
-      <div class="product-media">
-        <span class="product-index">03 / 05</span>
-        <span class="stock-tag">30 unidades</span>
-        <img src="imagenes/a20k.jpg" alt="Tablet infantil A20K">
-      </div>
-      <div class="product-info">
-        <div class="cat">Tablet infantil</div>
-        <h3>A20K</h3>
-        <p class="tagline">Protección para una experiencia más divertida.</p>
-        <div class="price-row"><span class="price">$150</span><span class="colors">15 rosa · 15 celeste</span></div>
-        <ul class="specs">
-          <li>Android 14</li>
-          <li>A523 Octa-Core 2.0 GHz</li>
-          <li>4 GB RAM + 64 GB</li>
-          <li>Pantalla IPS 10.1" · 1280 × 800</li>
-          <li>Cámara 2 MP + 5 MP</li>
-          <li>Batería 6000 mAh</li>
-          <li>Conectividad WiFi</li>
-        </ul>
-        <p class="includes">Funda infantil protectora con diseño de osito.</p>
-        <div class="product-actions">
-          <a class="btn-primary" href="https://wa.me/+593995235589?text=Hola,%20me%20interesa%20la%20Tablet%20A20K%20($150)" target="_blank" rel="noopener">Consultar disponibilidad</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4. CP20 -->
-    <div class="product reveal">
-      <div class="product-media">
-        <span class="product-index">04 / 05</span>
-        <span class="stock-tag">42 unidades</span>
-        <img src="imagenes/cp20.png" alt="Tablet infantil CP20">
-      </div>
-      <div class="product-info">
-        <div class="cat">Tablet infantil</div>
-        <h3>CP20</h3>
-        <p class="tagline">Aprender, jugar y descubrir.</p>
-        <div class="price-row"><span class="price">$140</span><span class="colors">21 rosa · 21 celeste</span></div>
-        <ul class="specs">
-          <li>Android 15</li>
-          <li>RK3562 Quad-Core 2.0 GHz</li>
-          <li>4 GB RAM + 8 GB expansión virtual</li>
-          <li>64 GB de almacenamiento</li>
-          <li>Pantalla IPS 10.1" · 1280 × 800</li>
-          <li>Cámara 2 MP + 8 MP</li>
-          <li>Batería 6000 mAh</li>
-          <li>WiFi 6 · Bluetooth 5.0</li>
-        </ul>
-        <p class="includes">Incluye funda EVA, cable USB-C, cargador y manual.</p>
-        <div class="product-actions">
-          <a class="btn-primary" href="https://wa.me/+593995235589?text=Hola,%20me%20interesa%20la%20Tablet%20CP20%20($140)" target="_blank" rel="noopener">Consultar disponibilidad</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 5. SMART ROBOT DOG -->
-    <div class="product reveal">
-      <div class="product-media">
-        <span class="product-index">05 / 05</span>
-        <span class="stock-tag">30 unidades</span>
-        <img src="imagenes/smartDog.jpg" alt="Smart Robot Dog">
-      </div>
-      <div class="product-info">
-        <div class="cat">Gadget interactivo</div>
-        <h3>Smart Robot Dog</h3>
-        <p class="tagline">Un regalo diferente que cobra vida.</p>
-        <div class="price-row"><span class="price">$60</span><span class="colors">15 rosa · 15 celeste</span></div>
-        <ul class="specs">
-          <li>Control remoto incluido</li>
-          <li>Camina y realiza movimientos</li>
-          <li>Responde al tacto en la barbilla</li>
-          <li>Música y funciones interactivas</li>
-          <li>Ejecuta secuencias de movimientos</li>
-          <li>Ideal para jugar en familia</li>
-        </ul>
-        <p class="includes">Pensado para niños, jóvenes y adultos que disfrutan de la tecnología.</p>
-        <div class="product-actions">
-          <a class="btn-primary" href="https://wa.me/+593995235589?text=Hola,%20me%20interesa%20el%20Smart%20Robot%20Dog%20($60)" target="_blank" rel="noopener">Consultar disponibilidad</a>
-        </div>
-      </div>
-    </div>
-
+    <div class="grid" id="grid"></div>
   </div>
 </section>
 
 <section class="contact" id="contacto">
   <div class="wrap">
-    <div class="reveal">
-      <h2>Escríbenos para confirmar disponibilidad, colores y entrega.</h2>
-      <p>Respondemos por WhatsApp — coordinamos color, cantidad y forma de entrega en Quito.</p>
-      <a class="btn-primary" href="https://wa.me/+593995235589?text=Hola%20BARLKT,%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">
-        Escribir por WhatsApp
-      </a>
-      <div class="contact-meta">
-        <span>Quito · Ecuador</span>
-        <span>Moderna · Cercana · Innovadora · Confiable</span>
-      </div>
+    <h2>Escríbenos para confirmar disponibilidad, colores y entrega.</h2>
+    <p>Tu carrito se convierte en un mensaje de WhatsApp listo para enviar — coordinamos color, cantidad y forma de entrega en Quito.</p>
+    <a class="btn-primary" href="https://wa.me/593995235589?text=Hola%20BARLKT,%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    <div class="contact-meta">
+      <span>Quito · Ecuador</span>
+      <span>Moderna · Cercana · Innovadora · Confiable</span>
     </div>
   </div>
 </section>
@@ -545,15 +419,298 @@
   </div>
 </footer>
 
-<a class="float-wa" href="https://wa.me/+593995235589" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="#161310"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.81L2 22l5.42-1.42a9.9 9.9 0 0 0 4.62 1.18h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.02c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.13.11-1.83-.12-.42-.14-.96-.32-1.66-.62-2.93-1.27-4.85-4.23-5-4.43-.15-.2-1.19-1.58-1.19-3.02 0-1.44.75-2.15 1.02-2.44.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.42-.07.65.5.24.58.82 2.02.89 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.18-.31.4-.44.53-.15.15-.3.31-.13.6.17.29.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.34 1.45.29.15.46.12.63-.07.17-.2.72-.84.92-1.13.19-.29.38-.24.63-.15.26.1 1.64.78 1.92.92.29.15.48.22.55.34.07.13.07.72-.17 1.4z"/></svg>
+<a class="float-wa" href="https://wa.me/593995235589" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg width="25" height="25" viewBox="0 0 24 24" fill="#161310"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.81L2 22l5.42-1.42a9.9 9.9 0 0 0 4.62 1.18h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.02c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.13.11-1.83-.12-.42-.14-.96-.32-1.66-.62-2.93-1.27-4.85-4.23-5-4.43-.15-.2-1.19-1.58-1.19-3.02 0-1.44.75-2.15 1.02-2.44.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.42-.07.65.5.24.58.82 2.02.89 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.18-.31.4-.44.53-.15.15-.3.31-.13.6.17.29.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.34 1.45.29.15.46.12.63-.07.17-.2.72-.84.92-1.13.19-.29.38-.24.63-.15.26.1 1.64.78 1.92.92.29.15.48.22.55.34.07.13.07.72-.17 1.4z"/></svg>
 </a>
 
+<!-- QUICK VIEW MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal"></div>
+</div>
+
+<!-- CART DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3>Tu carrito</h3>
+    <button class="modal-close" id="drawerClose" aria-label="Cerrar carrito">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer-items" id="drawerItems"></div>
+  <div class="drawer-foot">
+    <div class="subtotal-row"><span>Subtotal</span><b id="subtotal">$0</b></div>
+    <button class="btn-primary" id="checkoutBtn">Finalizar por WhatsApp</button>
+    <div class="drawer-note">Sin pago en línea. Confirmamos color, cantidad y entrega por chat antes de cerrar el pedido.</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
 <script>
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  },{threshold:0.15});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+/* ---------------- DATA ---------------- */
+const WHATSAPP_NUMBER = "593995235589";
+
+const PRODUCTS = [
+  {
+    id:"teclast", index:"01", cat:"tablets", catLabel:"Tablet",
+    name:"Teclast P50", tagline:"Grande para estudiar. Cómoda para llevar.",
+    price:150, img:"imagenes/teclast.png", stock:"2 unidades", low:true,
+    variants:[{name:"Azul", hex:"#4a7fb5"}],
+    specs:["Android 14","Unisoc T606 Octa-Core 1.6 GHz","6 GB RAM + 8 GB expansión virtual","128 GB · ampliable hasta 1 TB","Pantalla IPS 11\" · 1280 × 800","Cámara 13 MP + 5 MP","Batería 8000 mAh","WiFi 2.4/5 GHz · Bluetooth 5.0 · GPS"],
+    includes:"Incluye cargador y manual. Solo quedan 2 unidades en azul."
+  },
+  {
+    id:"camara", index:"02", cat:"seguridad", catLabel:"Seguridad para exteriores",
+    name:"Cámara S11", tagline:"Más tranquilidad, bajo el sol.",
+    price:70, img:"imagenes/camara.jpg", stock:"2 unidades", low:true,
+    variants:[{name:"Blanco", hex:"#f2f0ea"}],
+    specs:["Resolución 2K HD","Visión nocturna a color","Movimiento PTZ de amplio rango","Detección de movimiento PIR","Audio bidireccional","Batería de alta capacidad","Panel solar de 5 W","Monitoreo desde el celular"],
+    includes:"Verificar compatibilidad de conectividad antes de la instalación."
+  },
+  {
+    id:"a20k", index:"03", cat:"infantil", catLabel:"Tablet infantil",
+    name:"A20K", tagline:"Protección para una experiencia más divertida.",
+    price:150, img:"imagenes/a20k.jpg", stock:"30 unidades", low:false,
+    variants:[{name:"Rosa", hex:"#e0578f"},{name:"Celeste", hex:"#7fc4e6"}],
+    specs:["Android 14","A523 Octa-Core 2.0 GHz","4 GB RAM + 64 GB","Pantalla IPS 10.1\" · 1280 × 800","Cámara 2 MP + 5 MP","Batería 6000 mAh","Conectividad WiFi"],
+    includes:"Funda infantil protectora con diseño de osito."
+  },
+  {
+    id:"cp20", index:"04", cat:"infantil", catLabel:"Tablet infantil",
+    name:"CP20", tagline:"Aprender, jugar y descubrir.",
+    price:140, img:"imagenes/cp20.png", stock:"42 unidades", low:false,
+    variants:[{name:"Rosa", hex:"#e0578f"},{name:"Celeste", hex:"#7fc4e6"}],
+    specs:["Android 15","RK3562 Quad-Core 2.0 GHz","4 GB RAM + 8 GB expansión virtual","64 GB de almacenamiento","Pantalla IPS 10.1\" · 1280 × 800","Cámara 2 MP + 8 MP","Batería 6000 mAh","WiFi 6 · Bluetooth 5.0"],
+    includes:"Incluye funda EVA, cable USB-C, cargador y manual."
+  },
+  {
+    id:"smartdog", index:"05", cat:"gadgets", catLabel:"Gadget interactivo",
+    name:"Smart Robot Dog", tagline:"Un regalo diferente que cobra vida.",
+    price:60, img:"imagenes/smartDog.jpg", stock:"30 unidades", low:false,
+    variants:[{name:"Rosa", hex:"#e0578f"},{name:"Celeste", hex:"#7fc4e6"}],
+    specs:["Control remoto incluido","Camina y realiza movimientos","Responde al tacto en la barbilla","Música y funciones interactivas","Ejecuta secuencias de movimientos","Ideal para jugar en familia"],
+    includes:"Pensado para niños, jóvenes y adultos que disfrutan de la tecnología."
+  }
+];
+
+/* ---------------- STATE ---------------- */
+let cart = []; // {id, variant, qty}
+let activeFilter = "todos";
+
+/* ---------------- RENDER GRID ---------------- */
+const grid = document.getElementById("grid");
+function renderGrid(){
+  grid.innerHTML = "";
+  const items = PRODUCTS.filter(p => activeFilter==="todos" || p.cat===activeFilter);
+  items.forEach((p,i)=>{
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="card-media" data-open="${p.id}">
+        <span class="card-badge ${p.low?'low':''}">${p.stock}</span>
+        <img src="${p.img}" alt="${p.name}">
+        <div class="quick-view-btn">Vista rápida</div>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">${p.catLabel}</div>
+        <h3>${p.name}</h3>
+        <p class="card-tagline">${p.tagline}</p>
+        <div class="card-swatches">${p.variants.map(v=>`<span class="swatch" style="background:${v.hex}" title="${v.name}"></span>`).join("")}</div>
+        <div class="card-footer">
+          <span class="card-price">$${p.price}</span>
+          <button class="add-btn" data-quickadd="${p.id}" title="Añadir al carrito" aria-label="Añadir al carrito">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+    requestAnimationFrame(()=> setTimeout(()=> card.classList.add("in"), i*60));
+  });
+}
+renderGrid();
+
+document.getElementById("filters").addEventListener("click",(e)=>{
+  const btn = e.target.closest(".filter-chip");
+  if(!btn) return;
+  document.querySelectorAll(".filter-chip").forEach(c=>c.classList.remove("active"));
+  btn.classList.add("active");
+  activeFilter = btn.dataset.filter;
+  renderGrid();
+});
+
+grid.addEventListener("click",(e)=>{
+  const openBtn = e.target.closest("[data-open]");
+  if(openBtn){ openModal(openBtn.dataset.open); return; }
+  const addBtn = e.target.closest("[data-quickadd]");
+  if(addBtn){
+    const p = PRODUCTS.find(x=>x.id===addBtn.dataset.quickadd);
+    addToCart(p.id, p.variants[0].name, 1);
+  }
+});
+
+/* ---------------- QUICK VIEW MODAL ---------------- */
+const overlay = document.getElementById("overlay");
+const modal = document.getElementById("modal");
+let modalState = { id:null, variant:null, qty:1 };
+
+function openModal(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  modalState = { id, variant:p.variants[0].name, qty:1 };
+  renderModal(p);
+  overlay.classList.add("open");
+}
+function renderModal(p){
+  modal.innerHTML = `
+    <div class="modal-media">
+      <button class="modal-close" id="modalClose">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <img src="${p.img}" alt="${p.name}">
+    </div>
+    <div class="modal-info">
+      <div class="cat">${p.catLabel}</div>
+      <h3>${p.name}</h3>
+      <p class="tagline">${p.tagline}</p>
+      <div class="modal-price">$${p.price}</div>
+      ${p.variants.length>1 ? `
+      <div class="option-label">Color</div>
+      <div class="variant-row" id="variantRow">
+        ${p.variants.map(v=>`<button class="variant-opt ${v.name===modalState.variant?'active':''}" data-variant="${v.name}"><span class="dot" style="background:${v.hex}"></span>${v.name}</button>`).join("")}
+      </div>` : ``}
+      <ul class="modal-specs">${p.specs.map(s=>`<li>${s}</li>`).join("")}</ul>
+      <p class="modal-includes">${p.includes}</p>
+      <div class="option-label">Cantidad</div>
+      <div class="qty-row">
+        <div class="qty-stepper">
+          <button id="qtyMinus">−</button>
+          <span id="qtyVal">1</span>
+          <button id="qtyPlus">+</button>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-primary" id="modalAdd">Añadir al carrito</button>
+        <a class="btn-secondary" target="_blank" rel="noopener" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola, tengo una pregunta sobre '+p.name)}">Preguntar por WhatsApp</a>
+      </div>
+    </div>`;
+
+  document.getElementById("modalClose").onclick = closeModal;
+  const variantRow = document.getElementById("variantRow");
+  if(variantRow){
+    variantRow.addEventListener("click",(e)=>{
+      const b = e.target.closest(".variant-opt");
+      if(!b) return;
+      modalState.variant = b.dataset.variant;
+      variantRow.querySelectorAll(".variant-opt").forEach(x=>x.classList.remove("active"));
+      b.classList.add("active");
+    });
+  }
+  document.getElementById("qtyMinus").onclick = ()=>{ if(modalState.qty>1){ modalState.qty--; document.getElementById("qtyVal").textContent = modalState.qty; } };
+  document.getElementById("qtyPlus").onclick = ()=>{ modalState.qty++; document.getElementById("qtyVal").textContent = modalState.qty; };
+  document.getElementById("modalAdd").onclick = ()=>{
+    addToCart(p.id, modalState.variant, modalState.qty);
+    closeModal();
+  };
+}
+function closeModal(){ overlay.classList.remove("open"); }
+overlay.addEventListener("click",(e)=>{ if(e.target===overlay) closeModal(); });
+document.addEventListener("keydown",(e)=>{ if(e.key==="Escape"){ closeModal(); closeDrawer(); } });
+
+/* ---------------- CART ---------------- */
+function addToCart(id, variant, qty){
+  const existing = cart.find(l=>l.id===id && l.variant===variant);
+  if(existing){ existing.qty += qty; }
+  else { cart.push({id, variant, qty}); }
+  renderCart();
+  showToast(`Añadido: ${PRODUCTS.find(p=>p.id===id).name}`);
+  const badge = document.getElementById("cartBadge");
+  badge.classList.remove("pulse"); void badge.offsetWidth; badge.classList.add("pulse");
+}
+function removeLine(id, variant){
+  cart = cart.filter(l=>!(l.id===id && l.variant===variant));
+  renderCart();
+}
+function changeQty(id, variant, delta){
+  const line = cart.find(l=>l.id===id && l.variant===variant);
+  if(!line) return;
+  line.qty += delta;
+  if(line.qty<=0){ removeLine(id, variant); return; }
+  renderCart();
+}
+function cartTotal(){
+  return cart.reduce((sum,l)=> sum + PRODUCTS.find(p=>p.id===l.id).price * l.qty, 0);
+}
+function cartCount(){
+  return cart.reduce((sum,l)=> sum + l.qty, 0);
+}
+function renderCart(){
+  document.getElementById("cartBadge").textContent = cartCount();
+  const wrap = document.getElementById("drawerItems");
+  if(cart.length===0){
+    wrap.innerHTML = `<div class="drawer-empty">Tu carrito está vacío.<br>Explora la tienda y añade productos.</div>`;
+  } else {
+    wrap.innerHTML = cart.map(l=>{
+      const p = PRODUCTS.find(x=>x.id===l.id);
+      return `
+      <div class="cart-line">
+        <img src="${p.img}" alt="${p.name}">
+        <div class="cart-line-info">
+          <b>${p.name}</b>
+          <div class="cart-line-variant">${l.variant}</div>
+          <div class="cart-line-bottom">
+            <div class="cart-line-qty">
+              <button data-qty="-1" data-id="${p.id}" data-variant="${l.variant}">−</button>
+              <span>${l.qty}</span>
+              <button data-qty="1" data-id="${p.id}" data-variant="${l.variant}">+</button>
+            </div>
+            <span class="cart-line-price">$${p.price * l.qty}</span>
+          </div>
+          <button class="remove-line" data-remove="${p.id}" data-variant="${l.variant}">Eliminar</button>
+        </div>
+      </div>`;
+    }).join("");
+  }
+  document.getElementById("subtotal").textContent = "$" + cartTotal();
+}
+document.getElementById("drawerItems").addEventListener("click",(e)=>{
+  const qtyBtn = e.target.closest("[data-qty]");
+  if(qtyBtn){ changeQty(qtyBtn.dataset.id, qtyBtn.dataset.variant, parseInt(qtyBtn.dataset.qty)); return; }
+  const rmBtn = e.target.closest("[data-remove]");
+  if(rmBtn){ removeLine(rmBtn.dataset.id, rmBtn.dataset.variant); }
+});
+
+/* ---------------- DRAWER ---------------- */
+const drawer = document.getElementById("drawer");
+const drawerOverlay = document.getElementById("drawerOverlay");
+function openDrawer(){ drawer.classList.add("open"); drawerOverlay.classList.add("open"); }
+function closeDrawer(){ drawer.classList.remove("open"); drawerOverlay.classList.remove("open"); }
+document.getElementById("cartToggle").onclick = openDrawer;
+document.getElementById("drawerClose").onclick = closeDrawer;
+drawerOverlay.onclick = closeDrawer;
+
+/* ---------------- CHECKOUT ---------------- */
+document.getElementById("checkoutBtn").onclick = ()=>{
+  if(cart.length===0){ showToast("Tu carrito está vacío"); return; }
+  let msg = "Hola BARLKT, quiero hacer este pedido:\n\n";
+  cart.forEach(l=>{
+    const p = PRODUCTS.find(x=>x.id===l.id);
+    msg += `• ${p.name} (${l.variant}) x${l.qty} — $${p.price*l.qty}\n`;
+  });
+  msg += `\nTotal: $${cartTotal()}\n\nQuedo atento/a para confirmar disponibilidad y entrega.`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+};
+
+/* ---------------- TOAST ---------------- */
+let toastTimer;
+function showToast(text){
+  const t = document.getElementById("toast");
+  t.textContent = text;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=> t.classList.remove("show"), 2200);
+}
+
+renderCart();
 </script>
 
 </body>
