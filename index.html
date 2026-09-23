@@ -98,6 +98,26 @@
   }
   .social-btn:hover{border-color:var(--gold-light);color:var(--gold-light);}
 
+  .menu-btn{
+    display:none;background:none;border:1px solid var(--black-line);color:var(--cream);
+    width:40px;height:40px;border-radius:50%;align-items:center;justify-content:center;
+    flex-shrink:0;transition:border-color .2s;
+  }
+  .menu-btn:hover{border-color:var(--gold-light);}
+  .mobile-menu{
+    display:none;flex-direction:column;
+    max-height:0;overflow:hidden;
+    background:var(--black);border-bottom:1px solid var(--black-line);
+    transition:max-height .35s ease;
+  }
+  .mobile-menu.open{max-height:320px;}
+  .mobile-menu a{
+    padding:16px 24px;font-size:15px;color:var(--cream-muted);
+    border-top:1px solid var(--black-line);transition:color .2s;
+  }
+  .mobile-menu a:hover{color:var(--gold-light);}
+  .mobile-menu-wa{color:var(--gold-light) !important;font-weight:600;}
+
   /* ---------- HERO (dark, elegant) ---------- */
   .hero{position:relative;padding:190px 0 90px;border-bottom:1px solid var(--line);overflow:hidden;}
   .hero-spotlight{
@@ -383,16 +403,55 @@
 
   @media(max-width:860px){
     .wrap{padding:0 20px;}
+    .nav-inner{padding:14px 20px;}
     .nav-links{display:none;}
-    .hero{padding:150px 0 70px;}
+    .menu-btn{display:flex;}
+    .mobile-menu{display:flex;}
+    .hero{padding:130px 0 60px;}
     .hero-bg-mark{display:none;}
     .hero-stats{flex-direction:column;gap:12px;}
     .stat{border-right:none;border-bottom:1px solid var(--line);padding-bottom:12px;}
-    .trust-item{min-width:100%;}
+    .trust-item{min-width:100%;border-right:none;border-bottom:1px solid var(--line);}
+    .trust-item:last-child{border-bottom:none;}
     .footer-inner{flex-direction:column;}
     .footer-right{align-items:flex-start;}
+    .shop-head{padding-top:64px;}
   }
-  @media(max-width:480px){#navSocial{display:none;}}
+  @media(max-width:600px){
+    #navSocial{display:none;}
+    .nav-cta{display:none;}
+    .nav-inner{padding:12px 16px;}
+    .wrap{padding:0 16px;}
+    .hero{padding:118px 0 50px;}
+    .hero h1{font-size:34px;}
+    .hero p{font-size:15px;}
+    .hero-actions{gap:10px;}
+    .hero-actions .btn-primary,.hero-actions .btn-secondary{flex:1;justify-content:center;text-align:center;padding:13px 16px;font-size:13.5px;}
+    .marquee-track span{font-size:13px;padding:0 18px;}
+    .shop-head p{font-size:13.5px;}
+    .filters{padding:24px 0 28px;gap:8px;}
+    .filter-chip{padding:8px 14px;font-size:12.5px;}
+    .card-media{padding:26px;}
+    .card-body{padding:16px 16px 18px;}
+    .grid{gap:18px;padding:28px 0 64px;}
+    #pdpView{padding:118px 0 60px;}
+    .pdp-media{padding:22px;}
+    .pdp-video{margin-top:32px;}
+    .pdp-info{padding:28px 20px;}
+    .pdp-info h3{font-size:26px;}
+    .pdp-price{font-size:24px;}
+    .pdp-specs{grid-template-columns:1fr;}
+    .pdp-actions{flex-direction:column;}
+    .pdp-actions .btn-primary,.pdp-actions .btn-secondary{width:100%;justify-content:center;}
+    .carousel-arrow{width:32px;height:32px;}
+    .faq{padding:64px 0 24px;}
+    .faq-item summary{font-size:14.5px;padding:18px 2px;gap:12px;}
+    .contact{padding:70px 0 60px;}
+    .contact h2{font-size:28px;}
+    .float-wa{width:48px;height:48px;bottom:18px;right:18px;}
+    .drawer-foot{padding:18px 20px 22px;}
+    .drawer-items{padding:6px 20px;}
+  }
 </style>
 </head>
 <body>
@@ -415,8 +474,17 @@
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="9" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg>
         <span class="cart-badge" id="cartBadge">0</span>
       </button>
+      <button class="menu-btn" id="menuToggle" aria-label="Abrir menú">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path id="menuIconPath" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </div>
   </div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#tienda" onclick="closeMobileMenu();return goToShop(event)">Tienda</a>
+    <a href="#faq" onclick="closeMobileMenu()">Preguntas frecuentes</a>
+    <a href="#contacto" onclick="closeMobileMenu()">Contacto</a>
+    <a href="https://wa.me/593995235589?text=Hola%20BARLKT,%20quiero%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener" class="mobile-menu-wa">Escríbenos por WhatsApp</a>
+  </nav>
 </header>
 
 <!-- ======================= SHOP VIEW ======================= -->
@@ -625,14 +693,14 @@
 const WHATSAPP_NUMBER = "593995235589";
 
 // Reemplaza estos "#" por tus enlaces reales de redes sociales.
-const SOCIAL_LINKS = { instagram:"https://www.instagram.com/barlktmobile/", tiktok:"https://www.tiktok.com/@barlktmobile", facebook:"https://www.facebook.com/BarlktMobile/" };
+const SOCIAL_LINKS = { instagram:"#", tiktok:"#", facebook:"#" };
 
 const PRODUCTS = [
   {
     id:"teclast", index:"01", cat:"tablets", catLabel:"Tablet",
     name:"Teclast P50", tagline:"Grande para estudiar. Cómoda para llevar.",
     price:150,
-    images:["imagenes/teclast.png","imagenes/teclast-2.png","imagenes/teclast-3.png"],
+    images:["imagenes/teclast-1.png","imagenes/teclast-2.png","imagenes/teclast-3.png"],
     video:"imagenes/teclast-video.mp4",
     stock:"2 unidades", low:true,
     variants:[{name:"Azul", hex:"#4a7fb5"}],
@@ -643,7 +711,7 @@ const PRODUCTS = [
     id:"camara", index:"02", cat:"seguridad", catLabel:"Seguridad para exteriores",
     name:"Cámara S11", tagline:"Más tranquilidad, bajo el sol.",
     price:70,
-    images:["imagenes/camara.jpg","imagenes/camara-2.jpg","imagenes/camara-3.jpg"],
+    images:["imagenes/camara-1.jpg","imagenes/camara-2.jpg","imagenes/camara-3.jpg"],
     video:"imagenes/camara-video.mp4",
     stock:"2 unidades", low:true,
     variants:[{name:"Blanco", hex:"#f2f0ea"}],
@@ -654,7 +722,7 @@ const PRODUCTS = [
     id:"a20k", index:"03", cat:"infantil", catLabel:"Tablet infantil",
     name:"A20K", tagline:"Protección para una experiencia más divertida.",
     price:150,
-    images:["imagenes/a20k.jpg","imagenes/a20k-2.jpg","imagenes/a20k-3.jpg"],
+    images:["imagenes/a20k-1.jpg","imagenes/a20k-2.jpg","imagenes/a20k-3.jpg"],
     video:"imagenes/a20k-video.mp4",
     stock:"30 unidades", low:false,
     variants:[{name:"Rosa", hex:"#e0578f"},{name:"Celeste", hex:"#7fc4e6"}],
@@ -665,7 +733,7 @@ const PRODUCTS = [
     id:"cp20", index:"04", cat:"infantil", catLabel:"Tablet infantil",
     name:"CP20", tagline:"Aprender, jugar y descubrir.",
     price:140,
-    images:["imagenes/cp20.png","imagenes/cp20-2.png","imagenes/cp20-3.png"],
+    images:["imagenes/cp20-1.png","imagenes/cp20-2.png","imagenes/cp20-3.png"],
     video:"imagenes/cp20-video.mp4",
     stock:"42 unidades", low:false,
     variants:[{name:"Rosa", hex:"#e0578f"},{name:"Celeste", hex:"#7fc4e6"}],
@@ -676,7 +744,7 @@ const PRODUCTS = [
     id:"smartdog", index:"05", cat:"gadgets", catLabel:"Gadget interactivo",
     name:"Smart Robot Dog", tagline:"Un regalo diferente que cobra vida.",
     price:60,
-    images:["imagenes/smartDog.jpg","imagenes/smartDog-2.jpg"],
+    images:["imagenes/smartDog-1.jpg","imagenes/smartDog-2.jpg","imagenes/smartDog-3.jpg"],
     video:"imagenes/smartDog-video.mp4",
     stock:"30 unidades", low:false,
     variants:[{name:"Rosa", hex:"#e0578f"},{name:"Celeste", hex:"#7fc4e6"}],
@@ -701,6 +769,19 @@ function renderSocial(containerId){
 }
 renderSocial("navSocial");
 renderSocial("footerSocial");
+
+/* ---------------- MOBILE MENU ---------------- */
+const mobileMenu = document.getElementById("mobileMenu");
+const menuToggle = document.getElementById("menuToggle");
+const menuIconPath = document.getElementById("menuIconPath");
+function closeMobileMenu(){
+  mobileMenu.classList.remove("open");
+  menuIconPath.setAttribute("d","M4 7h16M4 12h16M4 17h16");
+}
+menuToggle.addEventListener("click", ()=>{
+  const isOpen = mobileMenu.classList.toggle("open");
+  menuIconPath.setAttribute("d", isOpen ? "M6 6l12 12M18 6L6 18" : "M4 7h16M4 12h16M4 17h16");
+});
 
 /* ---------------- HERO SPOTLIGHT ---------------- */
 const heroSection = document.getElementById("heroSection");
